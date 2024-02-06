@@ -1,0 +1,7 @@
+with cte as
+ (
+select r1.*,cast(r1.age as float) as age_1, r2.name as report_manager from report_table r1 join report_table r2
+on r1.reports_to=r2.emp_id
+)
+select reports_to as emp_id, report_manager, count(*) as report_countee, round(avg(age_1),0) as avg_age from cte
+group by reports_to,report_manager
